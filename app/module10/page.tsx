@@ -229,8 +229,50 @@ export default function UserCrud() {
                         <p><strong>Email:</strong> {searchedUser.email}</p>
                     </div>
                 )}
-            </div>
 
+
+                {/* หรือเขียนแบบให้แสดง ตาราง */}
+
+                {/* <div className="mb-8">
+                    <h2 className="text-lg font-semibold mb-4">
+                        User List
+                    </h2>
+                    <table className="w-full">
+                        <thead>
+                            <tr>
+                                <th className="px-4 py-2 bg-gray-200">ID</th>
+                                <th className="px-4 py-2 bg-gray-200">Name</th>
+                                <th className="px-4 py-2 bg-gray-200">Email</th>
+                                <th className="px-4 py-2 bg-gray-200">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((user) => (
+                                <tr key={user.id}>
+                                    <td className="px-4 py-2">{user.id}</td>
+                                    <td className="px-4 py-2">{user.name}</td>
+                                    <td className="px-4 py-2">{user.email}</td>
+                                    <td className="px-4 py-2">
+                                        <button type="button"
+                                            className="px-4 py-2 bg-yellow-500 text-white rounded-2xl px-3 py-1"
+                                            onClick={() => setEditId(user.id)}>
+                                            Edit
+                                        </button>
+                                        <button type="button"
+                                            className="px-4 py-2 bg-red-500 text-white rounded-2xl px-3 py-1"
+                                            onClick={() => handleDelete(user.id)}>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div> */}
+
+                {/* หรือเขียนแบบให้แสดงตาราง */}
+
+            </div>
         </div>
     );
 }
