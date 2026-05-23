@@ -7,6 +7,10 @@ type User = {
     id: number;
     name: string;
     email: string;
+    userGroup: {
+        name: string;
+        id: number;
+    }
 }
 
 export default function UserCrud() {
@@ -28,7 +32,7 @@ export default function UserCrud() {
                 throw new Error('Failed to fetch users');
             const data = await res.json();
             setUsers(data);
-
+            // console.log(data);
         } catch (error) {
             console.log(error);
             alert('Error fetching users');
@@ -86,6 +90,7 @@ export default function UserCrud() {
             });
             if (!res.ok) throw new Error('Failed to delete user');
             alert('User deleted successfully');
+
             fetchUsers(); //ดึงข้อมูลใหม่มาแสดง
         } catch (error) {
             console.log(error);
@@ -105,6 +110,12 @@ export default function UserCrud() {
             console.log(error);
             alert('Error searching user');
         }
+    }
+    // 4. PUT/api/crud/user/[id] (แก้ไขข้อมูล) 
+    const handleEdit = (user: User) => {
+        setEditId(user.id);
+        setName(user.name);
+        setEmail(user.email);
     }
 
     return (
@@ -166,6 +177,7 @@ export default function UserCrud() {
                     </div>
                 </form>
             </div>
+
             <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">All Users</h2>
                 <div className="space-y-2">
@@ -174,29 +186,33 @@ export default function UserCrud() {
                         <div key={user.id}
                             className="flex items-center justify-between p-4 bg-white border border-gray-300 rounded-2xl">
                             <div>
-                                <p className="font-semibold text-gray-800">{user.name}</p>
-                                <p className="text-sm text-gray-500">{user.email}</p>
+                                <div className="font-semibold text-gray-800">{user.name}
+                                    <span className="text-sm text-blue-800 font-medium ms-2">
+                                        #{user.id}
+                                    </span>
+                                </div>
+                                <div className="text-sm text-gray-600">{user.email}</div>
+                                <div>
+                                    ระดับผู้ใช้งาน:
+                                    {user.userGroup?.name}
+                                </div>
                             </div>
-                            <div className="flex gap-2">
-
-                                {/*สร้างปุ่มแก้ไข  */}
+                            <div>
                                 <button
-                                    onClick={() => {
-                                        setEditId(user.id);
-                                        setName(user.name);
-                                        setEmail(user.email);
-                                    }}
-                                    className="px-3 py-1 bg-yellow-400 text-white rounded-xl text-sm">
+                                    onClick={() => handleEdit(user)}
+                                    className="px-3 py-1 bg-yellow-400 text-white rounded-xl text-sm ms-2">
                                     Edit
                                 </button>
-
                                 {/*สร้างปุ่มลบ  */}
                                 <button
                                     onClick={() => handleDelete(user.id)}
-                                    className="px-3 py-1 bg-red-400 text-white rounded-xl text-sm">
+                                    className="px-3 py-1 bg-red-400 text-white rounded-xl text-sm ms-2">
                                     Delete
                                 </button>
+
+
                             </div>
+
                         </div>
                     ))}
                 </div>

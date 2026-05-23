@@ -13,7 +13,15 @@ datasource db {
 }
 
 model User {
+  id          Int        @id @default(autoincrement())
+  email       String     @unique
+  name        String?
+  userGroupId Int?
+  userGroup   UserGroup? @relation(fields: [userGroupId], references: [id])
+}
+
+model UserGroup {
   id    Int     @id @default(autoincrement())
   name  String?
-  email String  @unique
+  users User[]
 }

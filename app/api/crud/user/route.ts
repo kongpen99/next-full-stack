@@ -5,10 +5,23 @@
 
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+
+const userSchema = z.object({
+    name: z.string().trim(),
+    email: z.email().trim(),
+});
 
 //GET api/crud/user
 export async function GET() {
-    const users = await prisma.user.findMany();  //ดึงข้อมูลทั้งหมด
+    const users = await prisma.user.findMany({
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            userGroup: true,
+        }
+    });
     return NextResponse.json(users);
 }
 
@@ -16,11 +29,9 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const newUser = await prisma.user.create({
-            data: {
-                name: body.name,
-                email: body.email,
-            }
+        const newUser = userSchema.parse(body);
+        await prisma.user.create({
+            data: newUser
         });
         return NextResponse.json({ success: true, user: newUser });
 
