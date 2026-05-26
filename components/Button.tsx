@@ -19,4 +19,4 @@ export default function Button({ children, message }: ButtonProps) {
             {children}
         </button>
     )
-}
+} 
