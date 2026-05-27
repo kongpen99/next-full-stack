@@ -41,7 +41,7 @@ export default function caLculatePage() {
                     </button>
                 </form>
                 {state.result !== null && (
-                    <div className="mt-4 p-4 bg-green-500  transition-all duration-300 rounded-lg">
+                    <div className="mt-4 p-4 bg-green-600  transition-all duration-300 rounded-lg">
                         <p className="text-lg font-medium">Result: {state.result}</p>
                     </div>
                 )}
