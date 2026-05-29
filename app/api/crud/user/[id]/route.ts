@@ -9,9 +9,7 @@ import { NextResponse } from 'next/server';
 
 
 //GET api/crud/user/[id] ดึงข้อมูลทีละ id ออกมาแสดง
-export async function GET(
-    req: Request,
-    { params }: { params: { id: string } }) {
+export async function GET(Request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
         const { id } = await params;
         const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
