@@ -48,7 +48,7 @@ export async function PUT(
 //DELETE api/crud/user/[id] ลบข้อมูลทีละ id
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }) {
+    { params }: { params: Promise<{ id: string }> }) {
     try {
         const { id } = await params;
         const deletedUser = await prisma.user.delete({ where: { id: parseInt(id) } });
