@@ -26,7 +26,7 @@ export async function GET(Request: Request, { params }: { params: Promise<{ id: 
 //PUT api/crud/user/[id] แก้ไขข้อมูลทีละ id
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }) {
+    { params }: { params: Promise<{ id: string }> }) {
     try {
         const { id } = await params;
         const body = await req.json();
